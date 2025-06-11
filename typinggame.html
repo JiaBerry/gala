@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Gala the Koala's Word Typing Game</title>
+  <title> 🐨Gala the Koala's Word Typing Game🐨</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
 
@@ -111,7 +111,7 @@
 </head>
 
 <body>
-  <h1>Gala the Koala's Word Typing Game</h1>
+  <h1>🐨Gala the Koala's Word Typing Game🐨</h1>
 
   <button id="start-button">Start Game</button>
 
@@ -126,14 +126,15 @@
   </div>
 
   <script>
-    const wordPool = [
+    const fullWordList = [
       "red", "blue", "green", "yellow", "pink", "orange", "purple", "black", "white", "brown", "gray",
       "cat", "dog", "rabbit", "mouse", "horse", "cow", "pig", "sheep", "goat", "lion", "tiger", "bear", "zebra", "monkey", "elephant", "butterfly", "ladybug", "capybara", "koala", "kangaroo",
-      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
       "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
       "science", "English", "Japanese", "maths", "PE", "home economics", "art", "music"
     ];
 
+    let shuffledWords = [];
     let currentWord = "";
     let score = 0;
     let time = 60;
@@ -149,18 +150,21 @@
     const retryButton = document.getElementById("retry-button");
     const inputSection = document.getElementById("input-section");
 
-    function getRandomWord() {
-      const index = Math.floor(Math.random() * wordPool.length);
-      return wordPool[index];
+    function shuffle(array) {
+      return [...array].sort(() => Math.random() - 0.5);
     }
 
     function showNewWord() {
-      currentWord = getRandomWord();
+      if (shuffledWords.length === 0) {
+        shuffledWords = shuffle(fullWordList);
+      }
+      currentWord = shuffledWords.pop();
       wordDisplay.textContent = currentWord;
       input.value = "";
     }
 
     function startGame() {
+      shuffledWords = shuffle(fullWordList);
       score = 0;
       time = 60;
       scoreDisplay.textContent = "Score: 0";
@@ -186,7 +190,7 @@
       if (score >= 55) {
         message.textContent = "OMG! WHAT?!";
       } else if (score >= 45) {
-        message.textContent = "Too fast! Are you a robot?!";
+        message.textContent = "WOAH! Are you a robot?!";
       } else if (score >= 35) {
         message.textContent = "Amazing job!";
       } else if (score >= 25) {
