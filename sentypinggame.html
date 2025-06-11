@@ -128,7 +128,7 @@
     const sentences = [
       "Once upon a time, there was a girl named Alice.",
       "One day, she saw a white rabbit.",
-      "The rabbit wore a coat and looked at a watch.",
+      "The rabbit wore a coat and looked at his watch.",
       "Alice followed the rabbit.",
       "She fell down a deep hole.",
       "Alice landed in a strange place.",
@@ -140,7 +140,7 @@
       "She became very small.",
       "Then she ate a cake.",
       "She grew very big.",
-      "Alice met a Cheshire Cat.",
+      "Alice met the Cheshire Cat.",
       "The cat could disappear and appear again.",
       "Alice saw a mad hatter at a tea party.",
       "The mad hatter was very silly.",
@@ -223,9 +223,15 @@
       gameOver.textContent = "Time's up! Final Score: " + score;
 
       // Show message based on score
-      if (score >= 35) {
+      if (score >= 100) {
+        message.textContent = "OMG!";
+            } else if (score >= 65) {
+        message.textContent = "Speed demon over here!";
+         } else if (score >= 55) {
         message.textContent = "Hey! You're way too fast!";
-      } else if (score >= 30) {
+         } else if (score >= 45) {
+        message.textContent = "Fantastic work!";
+      } else if (score >= 35) {
         message.textContent = "Wow! You're doing great!";
       } else if (score >= 25) {
         message.textContent = "You're a fast typer!";
