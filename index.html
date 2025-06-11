@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Gala's Homepage</title>
-  <!-- Google Fonts: Fredoka -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
-  <!-- Your custom CSS -->
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka', cursive, sans-serif;
+      background-color: #ffc0cb; /* baby pink */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      color: black;
+      -webkit-text-stroke: 1px white; /* white outline */
+      text-stroke: 1px white;
+      font-size: 3em;
+      margin-bottom: 30px;
+    }
+    .cute-button {
+      display: inline-block;
+      background-color: #ff69b4;
+      color: white;
+      padding: 15px 30px;
+      margin: 10px 0;
+      font-weight: bold;
+      font-size: 1.2em;
+      border-radius: 15px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .cute-button:hover {
+      background-color: #ff1493;
+    }
+    /* Add space between buttons with a block wrapper */
+    .button-wrapper {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Let's play!🎮</h1>
-    <p>Click the game you'd like to play!</p>
-    <a href="typinggame.html" class="cute-button">Play Word Typing Game</a>
-    <a href="sentypinggame.html" class="cute-button">Play Sentence Typing Game</a>
+    <h1>Let's play! 🎮</h1>
+    <div class="button-wrapper">
+      <a href="typinggame.html" class="cute-button">Play Word Typing Game</a>
+    </div>
+    <div class="button-wrapper">
+      <a href="sentypinggame.html" class="cute-button">Play Sentence Typing Game</a>
+    </div>
   </div>
 </body>
 </html>
