@@ -107,6 +107,13 @@
       width: 100%;
       max-width: 650px;
     }
+
+    #meme-image {
+      display: none;
+      margin-top: 20px;
+      max-width: 400px;
+      border-radius: 15px;
+    }
   </style>
 </head>
 
@@ -122,6 +129,7 @@
     <div id="time">Time: 60</div>
     <div id="message"></div>
     <div id="game-over"></div>
+    <img id="meme-image" src="" alt="Result Meme" />
     <button id="retry-button" style="display:none;">Try Again</button>
   </div>
 
@@ -149,6 +157,7 @@
     const startButton = document.getElementById("start-button");
     const retryButton = document.getElementById("retry-button");
     const inputSection = document.getElementById("input-section");
+    const memeImage = document.getElementById("meme-image");
 
     function shuffle(array) {
       return [...array].sort(() => Math.random() - 0.5);
@@ -171,6 +180,7 @@
       timeDisplay.textContent = "Time: " + time;
       gameOver.textContent = "";
       message.textContent = "";
+      memeImage.style.display = "none";
       input.disabled = false;
       input.value = "";
       retryButton.style.display = "none";
@@ -187,20 +197,29 @@
       input.disabled = true;
       gameOver.textContent = "Time's up! Final Score: " + score;
 
+      let memeFile = "";
       if (score >= 55) {
         message.textContent = "OMG! WHAT?!";
+        memeFile = "woah.gif";
       } else if (score >= 45) {
         message.textContent = "WOAH! Are you a robot?!";
+        memeFile = "robot.gif";
       } else if (score >= 35) {
         message.textContent = "Amazing job!";
+        memeFile = "amazing.gif";
       } else if (score >= 25) {
         message.textContent = "Great work!";
+        memeFile = "greatjob.gif";
       } else if (score >= 15) {
         message.textContent = "Nice try!";
+        memeFile = "nicetry.gif";
       } else {
         message.textContent = "Keep practicing!";
+        memeFile = "keepprac.gif";
       }
 
+      memeImage.src = memeFile;
+      memeImage.style.display = "block";
       retryButton.style.display = "inline-block";
     }
 
