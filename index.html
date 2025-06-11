@@ -8,52 +8,60 @@
     body {
       margin: 0;
       font-family: 'Fredoka', cursive, sans-serif;
-      background-color: #ffc0cb; /* baby pink */
+      background-color: #ffb6c1; /* baby pink */
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-    }
-    .container {
+      color: white;
       text-align: center;
     }
+
+    /* Smaller white heading */
+    .subheading {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Big black text with white highlight background */
     h1 {
       color: black;
-      -webkit-text-stroke: 1px white; /* white outline */
-      text-stroke: 1px white;
-      font-size: 3em;
-      margin-bottom: 30px;
+      font-size: 3.5em;
+      margin-bottom: 40px;
+      background-color: white;
+      display: inline-block;
+      padding: 0 15px;
+      border-radius: 10px;
+      font-weight: 700;
     }
+
     .cute-button {
       display: inline-block;
-      background-color: #ff69b4;
+      background-color: #ff69b4; /* hot pink */
       color: white;
-      padding: 15px 30px;
-      margin: 10px 0;
       font-weight: bold;
-      font-size: 1.2em;
+      padding: 15px 35px;
       border-radius: 15px;
       text-decoration: none;
+      margin: 12px 0; /* vertical spacing */
+      font-size: 1.3em;
       transition: background-color 0.3s ease;
     }
+
     .cute-button:hover {
-      background-color: #ff1493;
-    }
-    /* Add space between buttons with a block wrapper */
-    .button-wrapper {
-      margin-bottom: 15px;
+      background-color: #ff1493; /* deeper pink on hover */
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Let's play! 🎮</h1>
-    <div class="button-wrapper">
-      <a href="typinggame.html" class="cute-button">Play Word Typing Game</a>
-    </div>
-    <div class="button-wrapper">
-      <a href="sentypinggame.html" class="cute-button">Play Sentence Typing Game</a>
-    </div>
-  </div>
+  <div class="subheading">Gala's Homepage</div>
+  <h1>Let's play! 🎮</h1>
+  
+  <a href="typinggame.html" class="cute-button">Play Word Typing Game</a>
+  <br />
+  <a href="sentypinggame.html" class="cute-button">Play Sentence Typing Game</a>
 </body>
 </html>
