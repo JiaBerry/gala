@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Gala's Sentence Typing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f8f8ff;
+      padding: 50px;
+    }
+
+    #sentence {
+      font-size: 1.5em;
+      margin: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+
+    #input {
+      font-size: 1.2em;
+      padding: 10px;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    #score,
+    #time {
+      font-size: 1.2em;
+      margin: 10px;
+    }
+
+    #game-over {
+      font-size: 1.5em;
+      color: red;
+      margin-top: 20px;
+    }
+
+    #message {
+      font-size: 1.5em;
+      color: #6a1b9a;
+      margin-top: 10px;
+    }
+
+    #start-button,
+    #retry-button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    #input-section {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Gala's Sentence Typing Game</h1>
+
+  <button id="start-button">Start Game</button>
+
+  <div id="input-section">
+    <div id="sentence">Press Start!</div>
+    <input id="input" type="text" autocomplete="off" autocapitalize="off" />
+    <div id="score">Score: 0</div>
+    <div id="time">Time: 90</div>
+    <div id="message"></div>
+    <div id="game-over"></div>
+    <button id="retry-button" style="display:none;">Try Again</button>
+  </div>
+
+  <script>
+    const sentences = [
+      "Alice was a curious girl.",
+      "One day, she saw a white rabbit.",
+      "The rabbit wore a coat and looked at a watch.",
+      "Alice followed the rabbit.",
+      "She fell down a deep hole.",
+      "Alice landed in a strange place.",
+      "This place was called Wonderland.",
+      "Alice met a talking mouse.",
+      "She saw a caterpillar on a mushroom.",
+      "The caterpillar gave Alice advice.",
+      "Alice drank from a bottle.",
+      "She became very small.",
+      "Then she ate a cake.",
+      "She grew very big.",
+      "Alice met a Cheshire Cat.",
+      "The cat could disappear and appear again.",
+      "Alice saw a mad hatter at a tea party.",
+      "The mad hatter was very silly.",
+      "Alice met a queen.",
+      "The queen was very angry.",
+      "The queen shouted “Off with their heads!”",
+      "Alice played croquet with the queen.",
+      "The balls were live animals.",
+      "The mallets were flamingos.",
+      "Alice found a door but did not have the key.",
+      "She drank more potion.",
+      "She became very small again.",
+      "Alice opened the door.",
+      "She met many strange creatures.",
+      "Alice spoke with a talking flower.",
+      "She met a sleepy dormouse.",
+      "Alice talked to a talking door mouse.",
+      "She saw a group of playing cards.",
+      "The cards painted white roses red.",
+      "Alice felt confused in Wonderland.",
+      "She wanted to go home.",
+      "Alice stood up to the angry queen.",
+      "Suddenly, Alice woke up.",
+      "It was all a dream.",
+      "Alice was back at home.",
+      "She smiled and thought about her adventure.",
+      "Alice knew she was brave and smart.",
+      "She wanted to learn more about the world.",
+      "Alice loved her family and friends.",
+      "She was happy to be home again.",
+      "Alice dreamed of Wonderland sometimes.",
+      "She knew she could be curious and kind.",
+      "Alice’s adventure taught her many things.",
+      "She looked forward to new adventures.",
+      "The end."
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
+    let time = 90;
+    let timerInterval;
+
+    const sentenceDisplay = document.getElementById("sentence");
+    const input = document.getElementById("input");
+    const scoreDisplay = document.getElementById("score");
+    const timeDisplay = document.getElementById("time");
+    const gameOver = document.getElementById("game-over");
+    const message = document.getElementById("message");
+    const startButton = document.getElementById("start-button");
+    const retryButton = document.getElementById("retry-button");
+    const inputSection = document.getElementById("input-section");
+
+    function showCurrentSentence() {
+      sentenceDisplay.textContent = sentences[currentIndex];
+      input.value = "";
+    }
+
+    function startGame() {
+      currentIndex = 0;
+      score = 0;
+      time = 90;
+      scoreDisplay.textContent = "Score: 0";
+      timeDisplay.textContent = "Time: " + time;
+      gameOver.textContent = "";
+      message.textContent = "";
+      input.disabled = false;
+      input.value = "";
+      retryButton.style.display = "none";
+      startButton.style.display = "none";
+      inputSection.style.display = "block";
+      showCurrentSentence();
+      input.focus();
+
+      timerInterval = setInterval(updateTime, 1000);
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      input.disabled = true;
+      gameOver.textContent = "Time's up! Final Score: " + score;
+
+      // Show message based on score
+      if (score >= 35) {
+        message.textContent = "Hey! You're way too fast!";
+      } else if (score >= 30) {
+        message.textContent = "Wow! You're doing great!";
+      } else if (score >= 25) {
+        message.textContent = "You're a fast typer!";
+      } else if (score >= 20) {
+        message.textContent = "Amazing!";
+      } else if (score >= 15) {
+        message.textContent = "Great work!";
+      } else if (score >= 10) {
+        message.textContent = "Good job!";
+      } else if (score >= 5) {
+        message.textContent = "Nice try!";
+      } else {
+        message.textContent = "";
+      }
+
+      retryButton.style.display = "inline-block";
+    }
+
+    function updateTime() {
+      time--;
+      timeDisplay.textContent = "Time: " + time;
+      if (time === 0) {
+        endGame();
+      }
+    }
+
+    input.addEventListener("input", function () {
+      if (input.value === sentences[currentIndex]) {
+        score += 5;
+        scoreDisplay.textContent = "Score: " + score;
+        currentIndex++;
+        if (currentIndex >= sentences.length) {
+          endGame();
+          return;
+        }
+        showCurrentSentence();
+      }
+    });
+
+    startButton.addEventListener("click", startGame);
+    retryButton.addEventListener("click", startGame);
+  </script>
+</body>
+
+</html>
