@@ -5,96 +5,107 @@
   <meta charset="UTF-8" />
   <title>Gala the Koala's Word Typing Game</title>
 
-  <!-- Fredoka One font -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
 
   <style>
     body {
-      font-family: 'Fredoka One', cursive;
+      font-family: 'Fredoka', cursive, sans-serif;
+      background-color: #b8e0d2;
       text-align: center;
-      background-color: #a8d0ff; /* pastel blue */
-      padding: 50px;
-      color: #333;
+      padding: 50px 20px;
+      color: #2f4f4f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.8em;
+      margin-bottom: 40px;
+      color: #2f4f4f;
+      text-shadow: 1px 1px 0 white;
     }
 
     #word {
-      font-size: 2.5em;
-      margin: 20px;
-      color: #054a91; /* deeper blue for contrast */
+      font-size: 2em;
+      margin: 20px auto;
+      max-width: 600px;
+      line-height: 1.5;
+      background-color: #dff6e4;
+      padding: 15px 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+      color: #3b5740;
     }
 
     #input {
-      font-size: 1.5em;
-      padding: 10px;
-      border-radius: 12px;
-      border: 2px solid #054a91;
-      width: 60%;
-      max-width: 400px;
+      font-size: 1.3em;
+      padding: 12px 15px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      border: 2px solid #88c9a7;
+      margin-top: 20px;
       outline: none;
       transition: border-color 0.3s ease;
     }
+
     #input:focus {
-      border-color: #ff70a6; /* cute pink highlight */
-      box-shadow: 0 0 8px #ff70a6;
+      border-color: #3b5740;
+      box-shadow: 0 0 8px #a3d8b9;
     }
 
     #score,
     #time {
-      font-size: 1.3em;
-      margin: 10px;
+      font-size: 1.4em;
+      margin: 12px 0;
       font-weight: 600;
+      color: #355e3b;
     }
 
     #game-over {
       font-size: 1.6em;
-      color: #ff3c78; /* warm pink */
-      margin-top: 20px;
+      color: #e63946;
+      margin-top: 30px;
+      font-weight: 700;
     }
 
-    #amazing {
-      font-size: 1.5em;
-      color: rgb(255, 0, 162);
+    #message {
+      font-size: 1.4em;
+      color: #4a7c59;
       margin-top: 10px;
-    }
-
-    #great {
-      font-size: 1.5em;
-      color: rgb(0, 166, 255);
-      margin-top: 10px;
-    }
-
-    #nicetry {
-      font-size: 1.5em;
-      color: rgb(255, 128, 0);
-      margin-top: 10px;
-    }
-
-    #toofast {
-      font-size: 1.5em;
-      color: rgb(149, 0, 255);
-      margin-top: 10px;
+      font-style: italic;
     }
 
     #start-button,
     #retry-button {
-      font-family: 'Fredoka One', cursive;
+      font-family: 'Fredoka', cursive, sans-serif;
       font-size: 1.3em;
-      padding: 12px 30px;
-      margin-top: 20px;
-      cursor: pointer;
-      border-radius: 25px;
+      padding: 12px 28px;
+      margin-top: 30px;
       border: none;
-      background: #ff70a6;
-      color: white;
-      transition: background-color 0.3s ease;
+      border-radius: 20px;
+      background-color: #88c9a7;
+      color: #2f4f4f;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     #start-button:hover,
     #retry-button:hover {
-      background: #d94d79;
+      background-color: #3b5740;
+      color: #dff6e4;
     }
 
     #input-section {
       display: none;
+      width: 100%;
+      max-width: 650px;
     }
   </style>
 </head>
@@ -109,33 +120,21 @@
     <input id="input" type="text" autocomplete="off" autocapitalize="off" />
     <div id="score">Score: 0</div>
     <div id="time">Time: 60</div>
-    <div id="amazing"></div>
-    <div id="great"></div>
-    <div id="nicetry"></div>
-    <div id="toofast"></div>
+    <div id="message"></div>
     <div id="game-over"></div>
     <button id="retry-button" style="display:none;">Try Again</button>
   </div>
 
   <script>
     const wordPool = [
-      // Colors
       "red", "blue", "green", "yellow", "pink", "orange", "purple", "black", "white", "brown",
-      // Animals
       "cat", "dog", "rabbit", "mouse", "horse", "cow", "pig", "sheep", "goat", "lion", "tiger", "bear", "zebra", "monkey", "elephant",
-      // Months (Capitalized)
-      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
-      // Days of the Week (Capitalized)
-      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
-      // Extras to hit 50
-      "cloud", "sun", "rain", "wind", "tree", "flower"
+      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     ];
 
-    let availableWords = [];
-    let usedWords = [];
-    let score = 0;
-    let time = 45;
     let currentWord = "";
+    let score = 0;
+    let time = 60;
     let timerInterval;
 
     const wordDisplay = document.getElementById("word");
@@ -143,59 +142,34 @@
     const scoreDisplay = document.getElementById("score");
     const timeDisplay = document.getElementById("time");
     const gameOver = document.getElementById("game-over");
-    const amazing = document.getElementById("amazing");
-    const toofast = document.getElementById("toofast");
-    const great = document.getElementById("great");
-    const nicetry = document.getElementById("nicetry");
+    const message = document.getElementById("message");
     const startButton = document.getElementById("start-button");
     const retryButton = document.getElementById("retry-button");
     const inputSection = document.getElementById("input-section");
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function refillWordList() {
-      availableWords = shuffle([...wordPool]);
-      usedWords = [];
-    }
-
-    function getNextWord() {
-      if (availableWords.length === 0) {
-        refillWordList();
-      }
-
-      const nextWord = availableWords.pop();
-      usedWords.push(nextWord);
-      return nextWord;
+    function getRandomWord() {
+      const index = Math.floor(Math.random() * wordPool.length);
+      return wordPool[index];
     }
 
     function showNewWord() {
-      currentWord = getNextWord();
+      currentWord = getRandomWord();
       wordDisplay.textContent = currentWord;
       input.value = "";
     }
 
     function startGame() {
       score = 0;
-      time = 45;
+      time = 60;
       scoreDisplay.textContent = "Score: 0";
       timeDisplay.textContent = "Time: " + time;
       gameOver.textContent = "";
-      amazing.textContent = "";
-      toofast.textContent = "";
-      great.textContent = "";
-      nicetry.textContent = "";
+      message.textContent = "";
       input.disabled = false;
       input.value = "";
       retryButton.style.display = "none";
       startButton.style.display = "none";
       inputSection.style.display = "block";
-      refillWordList();
       showNewWord();
       input.focus();
 
@@ -207,17 +181,18 @@
       input.disabled = true;
       gameOver.textContent = "Time's up! Final Score: " + score;
 
-      if (score > 35) {
-        toofast.textContent = "Hey! You're way too fast!";
-      }
-      else if (score > 25) {
-        amazing.textContent = "Amazing job!";
-      }
-      else if (score > 15) {
-        great.textContent = "Great job!";
-      }
-      else if (score > 5) {
-        nicetry.textContent = "Nice try!";
+      if (score >= 55) {
+        message.textContent = "OMG! WHAT?!";
+      } else if (score >= 45) {
+        message.textContent = "Too fast! Are you a robot?!";
+      } else if (score >= 35) {
+        message.textContent = "Amazing job!";
+      } else if (score >= 25) {
+        message.textContent = "Great work!";
+      } else if (score >= 15) {
+        message.textContent = "Nice try!";
+      } else {
+        message.textContent = "Keep practicing!";
       }
 
       retryButton.style.display = "inline-block";
@@ -232,8 +207,8 @@
     }
 
     input.addEventListener("input", function () {
-      if (input.value === currentWord) {
-        score++;
+      if (input.value.trim() === currentWord) {
+        score += 1;
         scoreDisplay.textContent = "Score: " + score;
         showNewWord();
       }
