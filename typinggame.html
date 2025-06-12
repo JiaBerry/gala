@@ -40,6 +40,8 @@
       border-radius: 15px;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
       color: #3b5740;
+      /* Make sure spans don't break to new lines */
+      white-space: nowrap;
     }
 
     #meme-image {
@@ -169,7 +171,11 @@
         shuffledWords = shuffle(fullWordList);
       }
       currentWord = shuffledWords.pop();
-      wordDisplay.textContent = currentWord;
+      // Display the new word with normal color spans
+      wordDisplay.innerHTML = currentWord
+        .split("")
+        .map(char => `<span>${char}</span>`)
+        .join("");
       input.value = "";
     }
 
@@ -241,8 +247,25 @@
     }
 
     input.addEventListener("input", function () {
-      if (input.value.trim() === currentWord) {
-        score += 1;
+      const userInput = input.value;
+      let displayHTML = "";
+
+      for (let i = 0; i < currentWord.length; i++) {
+        const typedChar = userInput[i] || "";
+        const correctChar = currentWord[i];
+        if (typedChar === correctChar) {
+          displayHTML += `<span style="color: black;">${correctChar}</span>`;
+        } else if (typedChar === "") {
+          displayHTML += `<span>${correctChar}</span>`;
+        } else {
+          displayHTML += `<span style="color: red;">${typedChar}</span>`;
+        }
+      }
+
+      wordDisplay.innerHTML = displayHTML;
+
+      if (userInput === currentWord) {
+        score++;
         scoreDisplay.textContent = "Score: " + score;
         showNewWord();
       }
