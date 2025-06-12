@@ -11,8 +11,7 @@
       background-color: #c9e9ff;
       text-align: center;
       padding: 50px 20px;
-      color: #2f4f4f;
-      /* dark slate gray for good contrast */
+      color: #2f4f4f; /* dark slate gray for good contrast */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -33,13 +32,11 @@
       margin: 20px auto;
       max-width: 600px;
       line-height: 1.5;
-      background-color: #dff6e4;
-      /* very light green background */
+      background-color: #dff6e4; /* very light green background */
       padding: 15px 25px;
       border-radius: 15px;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
       color: #3b5740;
-      /* We will fill this with spans for color */
     }
 
     #input {
@@ -51,12 +48,18 @@
       border: 2px solid #88c9a7;
       margin-top: 20px;
       outline: none;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     }
 
     #input:focus {
       border-color: #3b5740;
       box-shadow: 0 0 8px #a3d8b9;
+    }
+
+    #input.incorrect {
+      border-color: #e63946; /* red border for error */
+      background-color: #ffe6e6; /* very light red background */
+      color: #b22222; /* dark red text */
     }
 
     #score,
@@ -69,8 +72,7 @@
 
     #game-over {
       font-size: 1.6em;
-      color: #e63946;
-      /* soft red */
+      color: #e63946; /* soft red */
       margin-top: 30px;
       font-weight: 700;
     }
@@ -82,6 +84,7 @@
       font-style: italic;
     }
 
+    /* New styling for the meme image to center it */
     #meme {
       display: block;
       margin: 15px auto 0 auto;
@@ -117,23 +120,6 @@
       width: 100%;
       max-width: 650px;
     }
-
-    /* Red color for incorrect letters */
-    .incorrect {
-      color: red;
-    }
-
-    /* Confetti container styling */
-    #confetti-container {
-      pointer-events: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: visible;
-      z-index: 9999;
-    }
   </style>
 </head>
 
@@ -152,9 +138,6 @@
     <div id="game-over"></div>
     <button id="retry-button" style="display:none;">Try Again</button>
   </div>
-
-  <!-- Confetti container -->
-  <div id="confetti-container"></div>
 
   <script>
     const sentences = [
@@ -216,27 +199,11 @@
     const startButton = document.getElementById("start-button");
     const retryButton = document.getElementById("retry-button");
     const inputSection = document.getElementById("input-section");
-    const confettiContainer = document.getElementById("confetti-container");
 
-    // Show current sentence with colored letters based on user input
-    function showCurrentSentence(userInput = "") {
-      const sentence = sentences[currentIndex];
-      let html = "";
-      for (let i = 0; i < sentence.length; i++) {
-        const sentenceChar = sentence[i];
-        const inputChar = userInput[i];
-        if (inputChar === undefined) {
-          // Not typed yet, normal color
-          html += `<span>${sentenceChar}</span>`;
-        } else if (inputChar === sentenceChar) {
-          // Correct letter
-          html += `<span>${sentenceChar}</span>`;
-        } else {
-          // Wrong letter
-          html += `<span class="incorrect">${sentenceChar}</span>`;
-        }
-      }
-      sentenceDisplay.innerHTML = html;
+    function showCurrentSentence() {
+      sentenceDisplay.textContent = sentences[currentIndex];
+      input.value = "";
+      input.classList.remove('incorrect');
     }
 
     function startGame() {
@@ -252,6 +219,7 @@
       meme.alt = "";
       input.disabled = false;
       input.value = "";
+      input.classList.remove('incorrect');
       retryButton.style.display = "none";
       startButton.style.display = "none";
       inputSection.style.display = "block";
@@ -315,11 +283,6 @@
       }
 
       retryButton.style.display = "inline-block";
-
-      // Confetti if score > 0
-      if (score > 0) {
-        launchConfetti();
-      }
     }
 
     function updateTime() {
@@ -330,66 +293,8 @@
       }
     }
 
-    // Confetti code (simple version)
-    function launchConfetti() {
-      const colors = ["#f94144", "#f3722c", "#f9c74f", "#90be6d", "#577590"];
-      const confettiCount = 150;
-      for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement("div");
-        confetti.style.position = "absolute";
-        confetti.style.width = "8px";
-        confetti.style.height = "8px";
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.top = "-10px";
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.opacity = 0.8;
-        confetti.style.borderRadius = "50%";
-        confetti.style.pointerEvents = "none";
-        confetti.style.zIndex = 9999;
-        confettiContainer.appendChild(confetti);
-
-        // Animate confetti falling
-        const duration = Math.random() * 3000 + 3000;
-        confetti.animate(
-          [
-            { transform: `translateY(0) rotate(0deg)` },
-            { transform: `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 360}deg)` }
-          ],
-          {
-            duration: duration,
-            easing: "ease-out",
-            fill: "forwards"
-          }
-        );
-
-        // Remove confetti after animation
-        setTimeout(() => {
-          confetti.remove();
-        }, duration);
-      }
-    }
-
-    // Update displayed sentence on input, with coloring for incorrect letters
-    input.addEventListener("input", function () {
-      const userInput = input.value;
-      showCurrentSentence(userInput);
-
-      if (userInput === sentences[currentIndex]) {
-        score += 5;
-        scoreDisplay.textContent = "Score: " + score;
-        currentIndex++;
-        if (currentIndex >= sentences.length) {
-          endGame();
-          return;
-        }
-        showCurrentSentence("");
-        input.value = "";
-      }
-    });
-
-    startButton.addEventListener("click", startGame);
-    retryButton.addEventListener("click", startGame);
-  </script>
-</body>
-
-</html>
+    // Simple confetti effect
+    function confetti() {
+      const count = 100;
+      const colors = ['#a3d8b9', '#88c9a7', '#3b5740', '#dff6e4', '#2f4f4f'];
+      for (let
