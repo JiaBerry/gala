@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title> 🐨Gala the Koala's Word Typing Game🐨</title>
+  <title>🐨Gala the Koala's Word Typing Game🐨</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     body {
@@ -40,13 +41,14 @@
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
       color: #3b5740;
     }
-#meme-image {
-  display: none;
-  display: block;
-  margin: 20px auto 0 auto;
-  max-width: 400px;
-  border-radius: 15px;
-}
+
+    #meme-image {
+      display: none;
+      margin-top: 20px;
+      max-width: 400px;
+      border-radius: 15px;
+    }
+
     #input {
       font-size: 1.3em;
       padding: 12px 15px;
@@ -112,13 +114,6 @@
       display: none;
       width: 100%;
       max-width: 650px;
-    }
-
-    #meme-image {
-      display: none;
-      margin-top: 20px;
-      max-width: 400px;
-      border-radius: 15px;
     }
   </style>
 </head>
@@ -227,6 +222,14 @@
       memeImage.src = memeFile;
       memeImage.style.display = "block";
       retryButton.style.display = "inline-block";
+
+      if (score > 0) {
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 }
+        });
+      }
     }
 
     function updateTime() {
