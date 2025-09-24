@@ -225,23 +225,23 @@
       gameOver.textContent = "Time's up! Final Score: " + score;
 
       let memeFile = "";
-      if (score >= 50) {
+      if (score >= 20) {
         message.textContent = "OMG! WHAT?!";
         memeFile = "woah.gif";
-      } else if (score >= 45) {
+      } else if (score >= 16) {
         message.textContent = "WOAH! Are you a robot?!";
         memeFile = "robot.gif";
-      } else if (score >= 35) {
+      } else if (score >= 12) {
         message.textContent = "Amazing job!";
         memeFile = "amazing.gif";
-      } else if (score >= 25) {
+      } else if (score >= 8) {
         message.textContent = "Great work!";
         memeFile = "greatjob.gif";
-      } else if (score >= 15) {
-        message.textContent = "Nice try!";
+      } else if (score >= 4) {
+        message.textContent = "Good job!";
         memeFile = "nicetry.gif";
       } else {
-        message.textContent = "Keep practicing!";
+        message.textContent = "Nice!";
         memeFile = "keepprac.gif";
       }
 
@@ -272,3 +272,4 @@
 </body>
 
 </html>
+
