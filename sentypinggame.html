@@ -8,93 +8,95 @@
   <style>
     body {
       font-family: 'Fredoka', cursive, sans-serif;
-      background-color: #c9e9ff;
+      background-color: #c9e9ff; 
       text-align: center;
       padding: 50px 20px;
-      color: #2f4f4f;
+      color: #2f4f4f; /* dark slate gray for good contrast */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.7em; /* bigger base font */
+      font-size: 1.5em;
     }
+
 
     h1 {
       font-weight: 700;
-      font-size: 3.5em; /* larger heading */
+      font-size: 2.8em;
       margin-bottom: 40px;
       color: #2f4f4f;
-      text-shadow: 2px 2px 0 white;
+      text-shadow: 1px 1px 0 white;
     }
 
     #sentence {
-      font-size: 2.2em; /* bigger sentence text */
+      font-size: 1.6em;
       margin: 20px auto;
-      max-width: 1500px;
-      line-height: 1.6;
-      background-color: #dff6e4;
-      padding: 15px 15px; /* more padding */
-      border-radius: 20px;
+      max-width: 600px;
+      line-height: 1.5;
+      background-color: #dff6e4; /* very light green background */
+      padding: 15px 25px;
+      border-radius: 15px;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
       color: #3b5740;
     }
 
     #input {
-      font-size: 1.8em; /* bigger input font */
-      padding: 18px 22px;
-      width: 95%;
-      max-width: 2000px;
-      border-radius: 20px;
-      border: 3px solid #88c9a7;
-      margin-top: 25px;
+      font-size: 1.3em;
+      padding: 12px 15px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      border: 2px solid #88c9a7;
+      margin-top: 20px;
       outline: none;
       transition: border-color 0.3s ease;
     }
 
     #input:focus {
       border-color: #3b5740;
-      box-shadow: 0 0 12px #a3d8b9;
+      box-shadow: 0 0 8px #a3d8b9;
     }
 
     #score,
     #time {
-      font-size: 2em; /* larger stats */
-      margin: 15px 0;
+      font-size: 1.4em;
+      margin: 12px 0;
       font-weight: 600;
       color: #355e3b;
     }
 
     #game-over {
-      font-size: 2.4em; /* bigger game over */
-      color: #e63946;
-      margin-top: 35px;
+      font-size: 1.6em;
+      color: #e63946; /* soft red */
+      margin-top: 30px;
       font-weight: 700;
     }
 
     #message {
-      font-size: 1.9em; /* bigger feedback */
+      font-size: 1.4em;
       color: #4a7c59;
-      margin-top: 15px;
+      margin-top: 10px;
       font-style: italic;
     }
 
+    /* New styling for the meme image to center it */
     #meme {
       display: block;
-      margin: 20px auto 0 auto;
-      max-width: 320px; /* slightly bigger memes */
-      border-radius: 15px;
+      margin: 15px auto 0 auto;
+      max-width: 250px;
+      border-radius: 12px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     }
 
     #start-button,
     #retry-button {
       font-family: 'Fredoka', cursive, sans-serif;
-      font-size: 1.8em; /* bigger buttons */
-      padding: 18px 40px;
-      margin-top: 35px;
+      font-size: 1.3em;
+      padding: 12px 28px;
+      margin-top: 30px;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       background-color: #88c9a7;
       color: #2f4f4f;
       font-weight: 700;
@@ -112,88 +114,195 @@
     #input-section {
       display: none;
       width: 100%;
-      max-width: 750px;
-    }
-
-    /* 📱 Responsive adjustments */
-    @media (max-width: 1024px) {
-      body {
-        font-size: 1.3em;
-        padding: 30px 15px;
-      }
-
-      h1 {
-        font-size: 2.6em;
-        margin-bottom: 25px;
-      }
-
-      #sentence {
-        font-size: 1.9em;
-        padding: 12px 15px;
-        max-width: 1000px;
-      }
-
-      #input {
-        font-size: 1.4em;
-        padding: 14px 18px;
-        max-width: 1000px;
-      }
-
-      #score,
-      #time {
-        font-size: 1.6em;
-      }
-
-      #game-over {
-        font-size: 2em;
-      }
-
-      #message {
-        font-size: 1.5em;
-      }
-
-      #start-button,
-      #retry-button {
-        font-size: 1.5em;
-        padding: 14px 28px;
-      }
-
-      #meme {
-        max-width: 250px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        font-size: 1em;
-        padding: 20px 10px;
-      }
-
-      h1 {
-        font-size: 2.2em;
-      }
-
-      #sentence {
-        font-size: 1.5em;
-        padding: 10px 12px;
-        max-width: 95%;
-      }
-
-      #input {
-        font-size: 1.2em;
-        padding: 10px 12px;
-        max-width: 95%;
-      }
-
-      #start-button,
-      #retry-button {
-        font-size: 1.2em;
-        padding: 10px 20px;
-      }
-
-      #meme {
-        max-width: 200px;
-      }
+      max-width: 650px;
     }
   </style>
 </head>
+
+<body>
+  <h1>🐨Gala the Koala's Sentence Typing Game🐨</h1>
+
+  <button id="start-button">Start Game</button>
+
+  <div id="input-section">
+    <div id="sentence">Press Start!</div>
+    <input id="input" type="text" autocomplete="off" autocapitalize="off" />
+    <div id="score">Score: 0</div>
+    <div id="time">Time: 90</div>
+    <div id="message"></div>
+    <img id="meme" src="" alt="" style="display:none;" />
+    <div id="game-over"></div>
+    <button id="retry-button" style="display:none;">Try Again</button>
+  </div>
+
+  <script>
+    const sentences = [
+      "Once upon a time, there was a girl named Alice.",
+      "One day, she saw a white rabbit.",
+      "The rabbit wore a coat and looked at his watch.",
+      "Alice followed the rabbit.",
+      "She fell down a deep hole.",
+      "Alice landed in a strange place.",
+      "This place was called Wonderland.",
+      "Alice met a talking mouse.",
+      "She saw a caterpillar on a mushroom.",
+      "The caterpillar gave Alice advice.",
+      "Alice drank from a bottle.",
+      "She became very small.",
+      "Then she ate a cake.",
+      "She grew very big.",
+      "Alice met the Cheshire Cat.",
+      "The cat could disappear and appear again.",
+      "Alice saw a mad hatter at a tea party.",
+      "The mad hatter was very silly.",
+      "Alice met a queen.",
+      "The queen was always very angry.",
+      "Alice played croquet with the queen.",
+      "The balls were live animals.",
+      "The mallets were flamingos.",
+      "Alice found a door but did not have the key.",
+      "She drank more potion.",
+      "She became very small again.",
+      "Alice opened the door.",
+      "She met many strange creatures.",
+      "Alice spoke with a talking flower.",
+      "She met a sleepy dormouse.",
+      "Alice talked to a talking door mouse.",
+      "She saw a group of playing cards.",
+      "The cards painted white roses red.",
+      "Alice felt confused in Wonderland.",
+      "She wanted to go home.",
+      "Alice stood up to the angry queen.",
+      "Suddenly, Alice woke up.",
+      "It was all a dream.",
+      "Alice was back at home.",
+      "She smiled and thought about her adventure.",
+      "The end."
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
+    let time = 90;
+    let timerInterval;
+
+    const sentenceDisplay = document.getElementById("sentence");
+    const input = document.getElementById("input");
+    const scoreDisplay = document.getElementById("score");
+    const timeDisplay = document.getElementById("time");
+    const gameOver = document.getElementById("game-over");
+    const message = document.getElementById("message");
+    const meme = document.getElementById("meme");
+    const startButton = document.getElementById("start-button");
+    const retryButton = document.getElementById("retry-button");
+    const inputSection = document.getElementById("input-section");
+
+    function showCurrentSentence() {
+      sentenceDisplay.textContent = sentences[currentIndex];
+      input.value = "";
+    }
+
+    function startGame() {
+      currentIndex = 0;
+      score = 0;
+      time = 90;
+      scoreDisplay.textContent = "Score: 0";
+      timeDisplay.textContent = "Time: " + time;
+      gameOver.textContent = "";
+      message.textContent = "";
+      meme.style.display = "none";
+      meme.src = "";
+      meme.alt = "";
+      input.disabled = false;
+      input.value = "";
+      retryButton.style.display = "none";
+      startButton.style.display = "none";
+      inputSection.style.display = "block";
+      showCurrentSentence();
+      input.focus();
+
+      timerInterval = setInterval(updateTime, 1000);
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      input.disabled = true;
+      gameOver.textContent = "Time's up! Final Score: " + score;
+
+      let msg = "";
+      let memeFile = "";
+
+      if (score >= 120) {
+        msg = "OMG! WHAT?!";
+        memeFile = "omgwhat.gif";
+      } else if (score >= 95) {
+        msg = "Everybody watch out! They're typing too fast!";
+        memeFile = "watchout.gif";
+      } else if (score >= 85) {
+        msg = "Hey! You're way too fast!";
+        memeFile = "waytoofast.gif";
+      } else if (score >= 75) {
+        msg = "Fantastic work!";
+        memeFile = "fantastic.gif";
+      } else if (score >= 65) {
+        msg = "Wow! You're doing great!";
+        memeFile = "doinggreat.gif";
+      } else if (score >= 55) {
+        msg = "You're a fast typer!";
+        memeFile = "fasttyper.gif";
+      } else if (score >= 45) {
+        msg = "Amazing!";
+        memeFile = "amazing.gif";
+      } else if (score >= 35) {
+        msg = "Great work!";
+        memeFile = "great.gif";
+      } else if (score >= 25) {
+        msg = "Good job!";
+        memeFile = "goodjob.gif";
+      } else if (score >= 5) {
+        msg = "Nice try!";
+        memeFile = "nicetry.gif";
+      } else {
+        msg = "";
+        memeFile = "";
+      }
+
+      message.textContent = msg;
+
+      if (memeFile) {
+        meme.src = memeFile;
+        meme.alt = msg + " meme";
+        meme.style.display = "block";
+      } else {
+        meme.style.display = "none";
+      }
+
+      retryButton.style.display = "inline-block";
+    }
+
+    function updateTime() {
+      time--;
+      timeDisplay.textContent = "Time: " + time;
+      if (time === 0) {
+        endGame();
+      }
+    }
+
+    input.addEventListener("input", function () {
+      if (input.value === sentences[currentIndex]) {
+        score += 5;
+        scoreDisplay.textContent = "Score: " + score;
+        currentIndex++;
+        if (currentIndex >= sentences.length) {
+          endGame();
+          return;
+        }
+        showCurrentSentence();
+      }
+    });
+
+    startButton.addEventListener("click", startGame);
+    retryButton.addEventListener("click", startGame);
+  </script>
+</body>
+
+</html>
