@@ -217,21 +217,28 @@
     input.disabled = true;
     gameOver.textContent = "Time's up! Final Score: " + score;
 
-    let memeFile = "";
-    if (score >= 20) {
-      message.textContent = "Animal Master!";
-      memeFile = "amazing.gif";
-    } else if (score >= 15) {
-      message.textContent = "Great work!";
-      memeFile = "greatjob.gif";
-    } else if (score >= 10) {
-      message.textContent = "Nice try!";
-      memeFile = "nicetry.gif";
-    } else {
-      message.textContent = "Keep practicing!";
-      memeFile = "keepprac.gif";
-    }
+ let memeFile = "";
+      if (score >= 50) {
+        message.textContent = "OMG! WHAT?!";
+        memeFile = "woah.gif";
+      } else if (score >= 45) {
+        message.textContent = "WOAH! Are you a robot?!";
+        memeFile = "robot.gif";
+      } else if (score >= 35) {
+        message.textContent = "Amazing job!";
+        memeFile = "amazing.gif";
+      } else if (score >= 25) {
+        message.textContent = "Great work!";
+        memeFile = "greatjob.gif";
+      } else if (score >= 15) {
+        message.textContent = "Nice try!";
+        memeFile = "nicetry.gif";
+      } else {
+        message.textContent = "Keep practicing!";
+        memeFile = "keepprac.gif";
+      }
 
+    
     memeImage.src = memeFile;
     memeImage.style.display = "block";
     retryButton.style.display = "inline-block";
@@ -260,4 +267,5 @@
 </body>
 
 </html>
+
 
