@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title> 🐨Gala the Koala's Word Typing Game🐨</title>
+  <title> 🐨Gala the Koala's Word Typing Game - Animals🐨</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
+ <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -19,19 +19,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.5em; /* base size bumped */
+      font-size: 1.5em;
     }
 
     h1 {
       font-weight: 700;
-      font-size: 3.5em; /* bigger */
+      font-size: 3.5em;
       margin-bottom: 40px;
       color: #2f4f4f;
       text-shadow: 2px 2px 0 white;
     }
 
     #word {
-      font-size: 2.5em; /* bigger */
+      font-size: 2.5em;
       margin: 20px auto;
       max-width: 700px;
       line-height: 1.6;
@@ -42,15 +42,22 @@
       color: #3b5740;
     }
 
+    #word-image {
+      display: none;
+      margin: 20px auto;
+      max-width: 300px;
+      border-radius: 15px;
+    }
+
     #meme-image {
-      display: block;
-      margin: 20px auto 0 auto;
+      display: none;
+      margin: 20px auto;
       max-width: 450px;
       border-radius: 15px;
     }
 
     #input {
-      font-size: 1.8em; /* bigger */
+      font-size: 1.8em;
       padding: 15px 20px;
       width: 95%;
       max-width: 700px;
@@ -68,21 +75,21 @@
 
     #score,
     #time {
-      font-size: 2em; /* bigger */
+      font-size: 2em;
       margin: 15px 0;
       font-weight: 600;
       color: #355e3b;
     }
 
     #game-over {
-      font-size: 2.2em; /* bigger */
+      font-size: 2.2em;
       color: #e63946;
       margin-top: 30px;
       font-weight: 700;
     }
 
     #message {
-      font-size: 1.8em; /* bigger */
+      font-size: 1.8em;
       color: #4a7c59;
       margin-top: 10px;
       font-style: italic;
@@ -91,7 +98,7 @@
     #start-button,
     #retry-button {
       font-family: 'Fredoka', cursive, sans-serif;
-      font-size: 1.8em; /* bigger */
+      font-size: 1.8em;
       padding: 15px 35px;
       margin-top: 30px;
       border: none;
@@ -119,12 +126,13 @@
 </head>
 
 <body>
-  <h1>🐨Gala the Koala's Word Typing Game🐨</h1>
+  <h1>🐨Gala the Koala's Animal Typing Game🐨</h1>
 
   <button id="start-button">Start Game</button>
 
   <div id="input-section">
     <div id="word">Press Start!</div>
+    <img id="word-image" src="" alt="Animal Picture" />
     <input id="input" type="text" autocomplete="off" autocapitalize="off" />
     <div id="score">Score: 0</div>
     <div id="time">Time: 60</div>
@@ -136,11 +144,9 @@
 
   <script>
     const fullWordList = [
-      "red", "blue", "green", "yellow", "pink", "orange", "purple", "black", "white", "brown", "gray",
-      "cat", "dog", "rabbit", "mouse", "horse", "cow", "pig", "sheep", "goat", "lion", "tiger", "bear", "zebra", "monkey", "elephant", "butterfly", "ladybug", "capybara", "koala", "kangaroo",
-      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
-      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
-      "science", "English", "Japanese", "math", "PE", "home economics", "art", "music"
+      "cat", "dog", "rabbit", "mouse", "horse", "cow", "pig", "sheep", "goat",
+      "lion", "tiger", "bear", "zebra", "monkey", "elephant", "butterfly",
+      "ladybug", "capybara", "koala", "kangaroo"
     ];
 
     let shuffledWords = [];
@@ -150,6 +156,7 @@
     let timerInterval;
 
     const wordDisplay = document.getElementById("word");
+    const wordImage = document.getElementById("word-image");
     const input = document.getElementById("input");
     const scoreDisplay = document.getElementById("score");
     const timeDisplay = document.getElementById("time");
@@ -170,6 +177,8 @@
       }
       currentWord = shuffledWords.pop();
       wordDisplay.textContent = currentWord;
+      wordImage.src = currentWord + ".png";
+      wordImage.style.display = "block";
       input.value = "";
     }
 
@@ -199,19 +208,13 @@
       gameOver.textContent = "Time's up! Final Score: " + score;
 
       let memeFile = "";
-      if (score >= 50) {
-        message.textContent = "OMG! WHAT?!";
-        memeFile = "woah.gif";
-      } else if (score >= 45) {
-        message.textContent = "WOAH! Are you a robot?!";
-        memeFile = "robot.gif";
-      } else if (score >= 35) {
-        message.textContent = "Amazing job!";
+      if (score >= 20) {
+        message.textContent = "Animal Master!";
         memeFile = "amazing.gif";
-      } else if (score >= 25) {
+      } else if (score >= 15) {
         message.textContent = "Great work!";
         memeFile = "greatjob.gif";
-      } else if (score >= 15) {
+      } else if (score >= 10) {
         message.textContent = "Nice try!";
         memeFile = "nicetry.gif";
       } else {
@@ -246,4 +249,3 @@
 </body>
 
 </html>
-
